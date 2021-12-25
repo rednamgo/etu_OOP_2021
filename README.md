@@ -1,7 +1,7 @@
 # etu_OOP_2021
 
 ## Notice
-**This code is for study purposes only.** It may not contain the best or the most sound solutions, but it is what it is and it works.
+_This code is for study purposes only._ It may not contain the best or the most sound solutions, but it is what it is and it works.
 This repository will contain 6 homework tasks from 2021 OOP course of ETU and reports with UML-diagrams for them. Reports were done in Russian, no translation will be made. As it is a study project, the overall result is a mess, but might help some poor student.
 
 ## Tasks
