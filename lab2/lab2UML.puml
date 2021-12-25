@@ -1,0 +1,307 @@
+@startuml
+
+interface IEntity {
++interact(IEntity *): virtual void
++getType(): virtual int
+}
+
+interface Item {
++interact(IEntity *): virtual void
++getType(): virtual int
+}
+abstract class Actor {
++getDMG(int dmg): void
++heal (int hp): void
++getType(): virtual int
++getHP(): int
++getMaxHP(): int
++setXY(int x, int y): void
++getXY(): std::pair<int, int>
++getLocation(): gridLocation
+-HP: int
+-MP: int
+-RNGE: int
+-ATK: int
+-HPcap: int
+-MPcap: int
+-x: int
+-y: int
+-xy: gridLocation
+}
+
+class Player{
++interact(IEntity *): void
++die(Room *room): void
++move (int direction, Room *room): void
++attack (IEntity *target): void
++setWeapon(IWeapon *): void
++setPotion(IPotion *): void
++getType(): int
+-baseHP: int
+-baseMP: int
+-baseRNGE: int
+-baseATK: int
+-HPcap: int
+-MPcap: int
+-lvl: int
+-weapon: IWeapon *
+potion: IPotion *
+}
+
+interface IEnemy {
++act(Player &, Room *room): virtual void
++setMoveBehavior(MovementBehavior *m): virtual void
++setAtkBehavior(AttackBehavior *a): virtual void
++setDeathBehavior(DeathBehavior *d): virtual void
++getMoveBehavior(): virtual MovementBehavior *
++getAtkBehavior(): virtual AttackBehavior *
++getDeathBehavior(): virtual DeathBehavior *
++getType(): virtual int
++getRNGE(): virtual int
++getATK(): virtual int
++getAI(): virtual AI*
+}
+
+class Knight {
++act(Player &, Room *room): void
++setMoveBehavior(MovementBehavior *m): void
++setAtkBehavior(AttackBehavior *a): void
++setDeathBehavior(DeathBehavior *d): void
++getMoveBehavior(): MovementBehavior *
++getAtkBehavior(): AttackBehavior *
++getDeathBehavior(): DeathBehavior *
++getType(): int
++getRNGE(): int
++getATK(): int
++getAI(): AI*
+#movementBehavior: MovementBehavior *
+#attackBehavior: AttackBehavior *
+#deathBehavior: DeathBehavior *
+#baseHP: int
+#baseMP: int
+#baseRNGE: int
+#baseATK: int
+#RNGE: int
+#ATK: int
+#HPcap: int
+#MPcap: int
+#lvl: int
+#ai: AI *
+}
+
+class Demon {
++act(Player &, Room *room): void
++setMoveBehavior(MovementBehavior *m): void
++setAtkBehavior(AttackBehavior *a): void
++setDeathBehavior(DeathBehavior *d): void
++getMoveBehavior(): MovementBehavior *
++getAtkBehavior(): AttackBehavior *
++getDeathBehavior(): DeathBehavior *
++getType(): int
++getRNGE(): int
++getATK(): int
++getAI(): AI*
+#movementBehavior: MovementBehavior *
+#attackBehavior: AttackBehavior *
+#deathBehavior: DeathBehavior *
+#baseHP: int
+#baseMP: int
+#baseRNGE: int
+#baseATK: int
+#RNGE: int
+#ATK: int
+#HPcap: int
+#MPcap: int
+#lvl: int
+#ai: AI *
+}
+
+class Mage {
++act(Player &, Room *room): void
++setMoveBehavior(MovementBehavior *m): void
++setAtkBehavior(AttackBehavior *a): void
++setDeathBehavior(DeathBehavior *d): void
++getMoveBehavior(): MovementBehavior *
++getAtkBehavior(): AttackBehavior *
++getDeathBehavior(): DeathBehavior *
++getType(): int
++getRNGE(): int
++getATK(): int
++getAI(): AI*
+#movementBehavior: MovementBehavior *
+#attackBehavior: AttackBehavior *
+#deathBehavior: DeathBehavior *
+#baseHP: int
+#baseMP: int
+#baseRNGE: int
+#baseATK: int
+#RNGE: int
+#ATK: int
+#HPcap: int
+#MPcap: int
+#lvl: int
+#ai: AI *
+}
+
+interface IWeapon {
++getATK(): virtual int
++getRNGE(): virtual int
++setEffect(IPotion *): virtual void
++interact(IEntity *): virtual void
++getType(): virtual int
+}
+
+class Dagger {
++getATK(): int
++getRNGE(): int
++setEffect(IPotion *): void
++interact(IEntity *): void
++getType(): int
+-ATK: int
+-RNG: int
+-potion: IPotion *
+}
+
+interface IPotion {
++interact(IEntity *): virtual void
++use(IEntity *): virtual void
++getType(): virtual int
+}
+
+class HPotion {
++interact(IEntity *): void
++use(IEntity *): void
++getType(): int
+- healVal: int
+}
+
+class Poison {
++interact(IEntity *): void
++use(IEntity *): void
++getType(): int
+-DMGval: int
+-turns: int
+}
+
+class Placement {
++place(Room *room, IEntity *entity, gridLocation xy): void
++moveFrom(Room *room, IEntity *entity, gridLocation lastXY, gridLocation newXY): void
++deleteFromRoom(Room *room, IEntity *entity, gridLocation xy): void
+-entities: IEntity *
+-num: int
+}
+
+class Direction {
++getDir(int d): gridLocation
+}
+enum directions{
+UP = 1
+DOWN = 2
+RIGHT = 3
+LEFT = 4
+}
+
+class gridLocation {
+x: int
+y: int
+operator < (const gridLocation &a): bool const
+}
+
+Direction - gridLocation
+Direction -- directions
+Placement <- Room
+Placement <-- Direction
+Placement -- IEntity
+
+class EntityGenerator {
++generate(): void
++setFreeTiles(): void
++setEnemyNum(): void
++setItemNum(): void
++generatePlayer(): void
++generateEnemies(gridLocation &spawnXY, int &minTile, int index): void
++createEnemy(int type): static IEnemy *
++generateItems(gridLocation &spawnXY, int &minTile, int index): void
++createItem(int type): static Item *
++spawn(int type): void
+-room: Room *
+-entityNum: int
+-freeTiles: std::vector<gridLocation>
+}
+
+enum minDistGen {
+    ENEMY_DIST = 8
+    ITEM_DIST = 20
+}
+
+enum enemyTypes {
+    KNIGHT = 1,
+    DEMON = 2,
+    MAGE = 3
+}
+
+enum itemTypes {
+    HPOTION = 1
+    POISON = 2
+    DAGGER = 3
+}
+
+interface IGenerator
+
+EntityGenerator -- minDistGen
+EntityGenerator -- enemyTypes
+EntityGenerator -- itemTypes
+EntityGenerator <|- IGenerator
+EntityGenerator <- randNum
+EntityGenerator <------ Room
+EntityGenerator <------ Direction
+EntityGenerator <-- Knight
+EntityGenerator <-- Demon
+EntityGenerator <-- Mage
+EntityGenerator <-- HPotion
+EntityGenerator <-- Poison
+EntityGenerator <-- Dagger
+
+class Overlay {
++setHeightWidth(Room *room): void
++createArray(): void
++setOverlay(std::map<gridLocation, int> distance): void
++setGoalXY(std::vector<gridLocation> xy): void
++getGoal(): std::vector<gridLocation>
++getHeightWidth(): std::pair<int, int>
++getWalls(Room *room): void
++getNeighbours(gridLocation id) const: std::vector<gridLocation>
++in_bounds(gridLocation id): const bool
++passable(gridLocation id): const bool
++breadth_first_search(std::vector<gridLocation> start): void
++updateOverlay(int d): void
++print(): void
++getShortestPath(gridLocation &start): gridLocation&
++getOverlay(): int **
++getLayer(): std::map<gridLocation, int> *
+}
+
+Overlay <-- Room
+Overlay <-- Direction
+
+class PlayerSearchOverlay {
++createOverlay(Room *room): void
++flipIntoFleeOverlay(): void
+}
+
+PlayerSearchOverlay <|-- Overlay
+
+Item <|-- IEntity
+Actor <|-- IEntity
+Player <|-- Actor
+IEnemy <|-- Actor
+Knight <|--IEnemy
+Demon <|--IEnemy
+Mage <|--IEnemy
+IPotion <|-- Item
+HPotion <|-- IPotion
+Poison <|-- IPotion
+IWeapon <|-- Item
+Dagger <|-- IWeapon
+
+@enduml
