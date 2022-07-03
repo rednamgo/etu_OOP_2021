@@ -105,6 +105,33 @@ int main() {
 
 Code example: -//-
 
+output:
+<pre>
+# # # # # # # # # # # # # 
+# . # . . . . . . . . . # 
+# . . . . . . # . D . . # 
+# . . . . . . . . . . . # 
+@ . . . . . . . . . . . # 
+# . . . . . . # . . . . # 
+# . . . . . . . . . . M # 
+# . . . . . . . . . . . # 
+# . # . . . . . . . . . # 
+# . # . # . . . . . . . # 
+# . . . # . . . . . . . # 
+# . . . . . . . . . . . O 
+# # # # # # # # # # # # # 
+--------------------------
+  Player HP: 200/200
+	ATK: 10(+0)
+
+  ENEMIES LEFT: 
+	Mage HP: 20/20
+	Demon HP: 25/25
+
+Your input>>
+</pre>
+
+
 ## Sources and useful materials
 - General:
   - [Complete roguelike tutorial using C++ and libtcod](http://www.roguebasin.com/index.php/Complete_roguelike_tutorial_using_C%2B%2B_and_libtcod_-_part_1:_setting_up)
