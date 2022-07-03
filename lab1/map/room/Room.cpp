@@ -13,6 +13,7 @@ Room::Room(int num, int height, int width, std::pair<int, int> entry, std::pair<
     this->entry = entry;
     this->exit = exit;
     this->array = new Tile * [height];
+    this->killCnt = 0;
     for (int i = 0; i < height; i++)
         array[i] = new Tile [width];
 }
@@ -113,3 +114,4 @@ void Room::setOverlay() {
     }
     this->overlay[1].flipIntoFleeOverlay();
 }
+

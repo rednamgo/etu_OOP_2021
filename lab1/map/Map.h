@@ -15,6 +15,7 @@ public:
     Room& getRoom(int num);
     void addRoom(Room *room);
     void setCnt(int val) {this->room_cnt = val;}
+    int getRoomCnt() const {return this->room_cnt;}
 private:
     std::vector<Room*> rooms;
     int room_cnt;

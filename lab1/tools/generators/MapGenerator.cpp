@@ -26,7 +26,7 @@ void MapGenerator::rngMap() { //we work with prts cause we don`t want to copy va
 }
 
 void MapGenerator::readFromFile() {
-
+    //rewrite room read from file -> needs custom room numeration + path
 }
 
 void MapGenerator::saveInFile(std::string directory) {

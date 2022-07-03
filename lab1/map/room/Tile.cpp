@@ -14,8 +14,8 @@ Tile::Tile() {
 
 Tile::~Tile() = default;
 
-void Tile::setEntity(IEntity *entity) {
-    this->entity = entity;
+void Tile::setEntity(IEntity *e) {
+    this->entity = e;
     if (entity) {
         this->empty = false;
     } else this->empty = true;
@@ -46,7 +46,8 @@ int Tile::getType() {
 }
 
 void Tile::removeEntity() {
-    delete this->entity;
+    //delete this->entity;
+    setType(FLOOR);
     this->entity = nullptr;
 }
 

@@ -23,7 +23,7 @@ public:
     //Tile& operator = (const Tile& other);
     //Tile (Tile&& other) noexcept;//construct & move operator
     //Tile& operator = (Tile&& other) noexcept;
-    void setEntity(IEntity *entity);
+    void setEntity(IEntity *e);
     void removeEntity();
     IEntity *getEnitity() {return this->entity;}
     void setType(int type);

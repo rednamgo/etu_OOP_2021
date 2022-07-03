@@ -29,7 +29,7 @@ void RoomGenerator::generate() {
             setWall(tmp);
         }
     }
-    std::cout << this->room->getHeightWidth().first << " " << this->room->getHeightWidth().second << std::endl;
+    //std::cout << this->room->getHeightWidth().first << " " << this->room->getHeightWidth().second << std::endl;
     createEntry();
     createTunnels();
     room->setOverlay();
