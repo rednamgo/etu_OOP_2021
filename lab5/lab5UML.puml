@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+enum DefaultKeys {
+K_UP
+K_DOWN
+K_LEFT
+K_RIGHT
+}
+
+class Controls {
++settings(): void
++setControls(): void
++displayControls() const: void
++right() const: char
++left() const: char
++down() const: char
++up() const: char
+-_key_UP: char
+-_key_DOWN: char
+-_key_LEFT: char
+-_key_RIGHT: char;
+}
+
+Controls - DefaultKeys
+
+class Handler_Ctrl {
++requestMove(): void
+-_room: Room *
+-ctrl: Controls
+-input: char
+}
+
+Handler_Ctrl <-- Controls
+Handler_Ctrl <- Room
+Handler_Ctrl <- Player
+
+class Menu_Draw {
++print(Room *room): void
++print_player_info(Room *room): void
++print_enemy_info(Room *room): void
+}
+
+abstract class IEnemy
+
+Menu_Draw <-- Room
+Menu_Draw <- IEnemy
+
+@enduml

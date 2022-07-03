@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Rules_roomClear {
++preset(): void
++checkRoomClear(int curr): bool
++win(): bool
++lose(): bool
+-reference: int
+-_room: Room &
+}
+
+class Presets_roomClear {
++allClear(Room &room): static int
++allEnemies(Room &room): static int
++fullHP(Room &room): static int
+}
+
+class Game {
++start(): void
+}
+
+abstract class IEnemy{}
+
+
+Rules_roomClear <-- Room
+Rules_roomClear <-- IEnemy
+Presets_roomClear <- Room
+Presets_roomClear <- IEnemy
+Rules_roomClear <- Presets_roomClear
+Game <-- Rules_roomClear
+Game <--- EntityGenerator
+Game <--- Map
+Game <--- RoomGenerator
+Game <--- RoomDraw
+Game <--- HandlerCtrl
+Game <--- Menu_Draw
+
+@enduml
