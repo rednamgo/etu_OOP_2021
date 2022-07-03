@@ -2,7 +2,7 @@
 
 ## Notice
 _This code is for study purposes only._ It may not contain the best or the most sound solutions, but it is what it is and it works.
-This repository will contain 6 homework tasks from 2021 OOP course of ETU and reports with UML-diagrams for them. No translation will be made. As it is a study project, the overall result is a mess, but might help some poor student.
+This repository will contain 6 homework tasks from 2021 OOP course of ETU and with UML-diagrams for them. As it is a study project, the overall result is a mess, but might help some poor student.
 
 ## Tasks
 
@@ -14,12 +14,73 @@ This repository will contain 6 homework tasks from 2021 OOP course of ETU and re
 5. For the field class implement copy and move constructors and operators
 6. Make sure there's no memory leaks
 
+Code example:
+```c++
+int main() {    
+    Room *room = new Room;
+    RoomGenerator gen(room);
+    gen.generate(); //random room, not reading from file
+    RoomDraw drawer;
+    drawer.draw(room);
+    
+    return 0;
+ }
+```
+output:
+<pre>
+# # # # # # # # # # # # # # #
+# # # # # . . . . . . . . . #
+# # # # # . . . . . . . . . #
+# # # # # # # . . . # . . . #
+# # # # # # . . . . . . . . O
+# . . . . . . . . . . . . . #
+# . # # # # . # . # . # # . #
+E . . . . . . . . . . # # . #
+# # # # # # . # . . . # # . #
+# # # # # # . # . . . . . . #
+# # # # # # . . . . . . # . #
+# # # # # # . . . . . . . . #
+# # # # . . . . . . . # # # #
+# # # # # # # # # # # # # # #
+</pre>
 ### Lab2 - Interfaces, polymorphism
 1. There are 3 types of objects to store in tile: Player, Enemy, Item
 2. Implement player class. Player should have their own stats that can change in game. Player must have interaction, attack and movement methods implemented. Interaction with exit tile should be implemented
 3. Implement 3 types of enemies. They should have their own stats, preferably different. Implement movement behaviour. In death they should be deleted from the game field. Enemies must have their own interface
 4. Implement 3 types of items. Each item should have it's own effects when picked up, after which it dissapears from field. Items hsould have their own interface
 5. Polymorphism ideas must be used
+
+Code example:
+```c++
+int main() {    
+    Room *room = new Room;
+    RoomGenerator gen(room);
+    gen.generate(); //random room, not reading from file
+    EntityGenerator egen(room);
+    egen.generate();
+    RoomDraw drawer;
+    drawer.draw(room);
+    
+    return 0;
+ }
+```
+output:
+<pre>
+# # # # # # # # # # # # # # # 
+# # # # # . . . . . . . . . # 
+# # # # # . . . . . . . D . # 
+# # # # # # # . . . # K . . # 
+# # # # # # . . . . . . . . O 
+# . . H . . . . . . . . . . # 
+# . # # # # . # . # . # # . # 
+@ . . . . . . . . . . # # . # 
+# # # # # # . # D . . # # . # 
+# # # # # # . # . . . . . . # 
+# # # # # # . . . . M . # . # 
+# # # # # # . . . . . . D . # 
+# # # # . . . . . . . # # # # 
+# # # # # # # # # # # # # # #
+</pre>
 
 ### Lab3 - Loggers, methods override
 ...
