@@ -5,10 +5,10 @@
 #include "HPotion.h"
 
 void HPotion::interact(IEntity *entity) {
-    auto target = dynamic_cast<Player*>(entity);
-    if (target) {
+    //auto target = dynamic_cast<Player*>(entity);
+    /*if (target) {
         target->setPotion(this);
-    } else use(entity);
+    } else */use(entity);
 }
 
 void HPotion::use(IEntity *entity) {

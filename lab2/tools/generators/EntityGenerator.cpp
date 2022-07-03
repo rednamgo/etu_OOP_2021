@@ -10,6 +10,7 @@ void EntityGenerator::generate() {
     setFreeTiles();
     setEnemyNum();
     spawn(ENEMY_DIST);
+    this->room->setEnemyCnt(this->entityNum);
     setItemNum();
     spawn(ITEM_DIST);
 }
@@ -34,7 +35,6 @@ void EntityGenerator::setFreeTiles() { //MIN_SIZE of the room = 10, spawn area -
 }
 
 void EntityGenerator::generateEnemies(gridLocation &spawnXY, int &minTile, int index) {
-
     this->room->getArray()[spawnXY.x][spawnXY.y].setEntity(createEnemy(index));
     auto *tmp = dynamic_cast<Actor *>(this->room->getArray()[spawnXY.x][spawnXY.y].getEnitity());
     if (tmp) tmp->setXY(spawnXY.x, spawnXY.y);

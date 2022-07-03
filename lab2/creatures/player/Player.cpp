@@ -12,23 +12,43 @@ void Player::die(Room *room) {
 }
 
 void Player::move(int direction, Room *room) {
+    IEntity *tmp;
+    Item *i_tmp;
     Direction dir;
     Placement placer{};
     if (room->getTile(this->getXY().first + dir.getDir(direction).x, this->getXY().second + dir.getDir(direction).y)->canWalk())
-        placer.moveFrom(room, this, this->getLocation(),
-                    {this->getXY().first + dir.getDir(direction).x, this->getXY().second + dir.getDir(direction).y});
+        if (room->getTile(this->getXY().first + dir.getDir(direction).x, this->getXY().second + dir.getDir(direction).y)->isEmpty()) {
+            placer.moveFrom(room, this, this->getLocation(),
+                            {this->getXY().first + dir.getDir(direction).x,
+                             this->getXY().second + dir.getDir(direction).y});
+            room->getPlayerSearchOverlay()->updateOverlay(direction);
+        } else {
+            interact(room->getTile(this->getXY().first + dir.getDir(direction).x,
+                                        this->getXY().second + dir.getDir(direction).y)->getEnitity());
+            tmp = room->getTile(this->getXY().first + dir.getDir(direction).x,
+                          this->getXY().second + dir.getDir(direction).y)->getEnitity();
+            i_tmp = dynamic_cast<Item *>(tmp);
+            if (i_tmp && i_tmp->isTaken()) placer.deleteFromRoom(room, i_tmp, {this->getXY().first + dir.getDir(direction).x,
+                                                                               this->getXY().second + dir.getDir(direction).y});
+        }
     else return;
 }
 
 void Player::attack(IEntity *target) {
-    auto enemy = dynamic_cast<Actor*>(target);
-    if (this->weapon)
-        enemy->getDMG(this->weapon->getATK());
-    else enemy->getDMG(this->baseATK);
+    if (target) {
+        auto enemy = dynamic_cast<Actor *>(target);
+        if (this->weapon)
+            enemy->getDMG(this->weapon->getATK() + this->baseATK);
+        else enemy->getDMG(this->baseATK);
+    } else return;
 }
 
 void Player::setWeapon(IWeapon *new_weapon) {
     this->weapon = new_weapon;
+    /*if (this->weapon) {
+        this->baseATK += this->weapon->getATK();
+        this->baseRNGE = this->weapon->getRNGE();
+    }*/
 }
 
 void Player::interact(IEntity *target) {
@@ -36,8 +56,10 @@ void Player::interact(IEntity *target) {
     if (enemy) {
         attack(enemy);
         return;
+    } else {
+        target->interact(this);
+        dynamic_cast<Item *>(target)->setTaken(true);
     }
-    target->interact(this);
 }
 
 /*void Player::discard() {

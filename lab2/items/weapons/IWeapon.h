@@ -15,6 +15,9 @@ public:
     virtual void setEffect(IPotion *) = 0;
     virtual void interact(IEntity *) = 0;
     virtual int getType() = 0;
+    virtual std::string getName() = 0;
+    virtual bool isTaken() = 0;
+    virtual void setTaken(bool t) = 0;
 };
 
 

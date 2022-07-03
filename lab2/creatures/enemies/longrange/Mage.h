@@ -9,7 +9,10 @@
 
 class Mage: public IEnemy{
 public:
-    Mage(): Actor(baseHP, baseMP, baseRNGE, baseATK, HPCAP, MPCAP) {this->ai = new AI;}
+    Mage(): Actor(baseHP = 20, baseMP = 100, baseRNGE = 5, baseATK = 1, HPCAP = 20, MPCAP = 100) {
+        this->ai = new AI;
+        this->dead = false;
+    }
     ~Mage() = default;
     void act(Player &, Room *room);
     void setMoveBehavior(MovementBehavior *m) {this->movementBehavior = m;}
@@ -21,18 +24,23 @@ public:
     //void heal(Actor &target);
     //void interact(IEntity*) override {};
     int getType() override {return 6;}
-    int getRNGE() {return this->baseRNGE;}
-    int getATK() {return this->baseATK;}
-    AI* getAI() {return this->ai;}
+    int getRNGE() override {return this->baseRNGE;}
+    int getATK() override {return this->baseATK;}
+    AI* getAI() override {return this->ai;}
+    std::string getName() override {return "Mage";}
+    void setDead(bool d) {this->dead = d;}
+    bool isDead() {return this->dead;}
 
 protected:
+    bool dead;
     MovementBehavior *movementBehavior;
     AttackBehavior *attackBehavior;
     DeathBehavior *deathBehavior;
 
-    int HPCAP = 50*lvl, MPCAP = 100*lvl;
-    int baseATK = 1, baseHP = 20, baseMP = 100, baseRNGE = 5;
     int lvl = 1;
+    int HPCAP = 20*lvl, MPCAP = 100*lvl;
+    int baseATK = 1, baseHP = 20, baseMP = 100, baseRNGE = 5;
+
     AI *ai = new AI;
 
 };

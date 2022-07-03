@@ -17,9 +17,14 @@ public:
     void setEffect(IPotion *) override;
     void interact(IEntity *) override;
     int getType() override {return 1;}
+    std::string getName() override {return "Dagger";}
+    bool isTaken() {return this->taken;}
+    void setTaken(bool t) {this->taken = t;}
 private:
     int ATK = 10, RNG = 1;
     IPotion *potion;
+    bool taken = false;
+    gridLocation xy;
 };
 
 

@@ -141,7 +141,9 @@ void Overlay::setOverlay(std::map<gridLocation, int> distance) {
         for (int j = 0; j < width; j++) {
             if (passable({i, j}))
                 overlay[i][j] = distance[{i, j}];
-            else overlay[i][j] = 100;
+            else {
+                layer[{i, j}] = 10000;
+                overlay[i][j] = 10000; }
         }
     }
 }

@@ -24,10 +24,13 @@ public:
     virtual MovementBehavior *getMoveBehavior() = 0;
     virtual AttackBehavior *getAtkBehavior() = 0;
     virtual DeathBehavior *getDeathBehavior() = 0;
+    virtual std::string getName() = 0;
     virtual int getType() = 0;
     virtual int getRNGE() = 0;
     virtual int getATK() = 0;
     virtual AI* getAI() = 0;
+    virtual void setDead(bool d) = 0;
+    virtual bool isDead() = 0;
 };
 
 

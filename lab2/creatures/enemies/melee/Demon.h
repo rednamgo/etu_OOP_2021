@@ -9,7 +9,10 @@
 
 class Demon: public IEnemy{
 public:
-    Demon(): Actor(baseHP, baseMP, baseRNGE, baseATK, HPCAP, MPCAP) {this->ai = new AI;}
+    Demon(): Actor(baseHP = 25, baseMP = 100, baseRNGE = 1, baseATK = 5, HPCAP = 25, MPCAP = 150) {
+        this->ai = new AI;
+        this->dead = false;
+    }
     ~Demon() = default;
     void act(Player &, Room *room);
     void setMoveBehavior(MovementBehavior *m) {this->movementBehavior = m;}
@@ -20,16 +23,22 @@ public:
     DeathBehavior *getDeathBehavior() {return this->deathBehavior;}
     int getType() override {return 5;}
     int getRNGE() override {return this->baseRNGE;}
-    int getATK(){return this->baseATK;}
+    int getATK() override{return this->baseATK;}
     AI* getAI() {return this->ai;}
+    std::string getName() override {return "Demon";}
+
+    void setDead(bool d) {this->dead = d;}
+    bool isDead() {return this->dead;}
+
 protected:
+    bool dead;
     MovementBehavior *movementBehavior;
     AttackBehavior *attackBehavior;
     DeathBehavior *deathBehavior;
-
-    int HPCAP = 50*lvl, MPCAP = 150*lvl;
-    int baseHP = 50, baseMP = 100, baseRNGE = 2, baseATK = 10;
     int lvl = 1;
+    int HPCAP = 25*lvl, MPCAP = 150*lvl;
+    int baseHP = 25, baseMP = 100, baseRNGE = 1, baseATK = 5;
+
     AI *ai;
 };
 

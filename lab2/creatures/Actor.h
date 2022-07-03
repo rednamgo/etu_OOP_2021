@@ -7,7 +7,7 @@
 #include "../IEntity.h"
 //#include "../items/Item.h"
 #include <iostream>
-#include "../tools/Direction.h"
+
 
 enum actorTypes { ///maybe delete
     PLAYER = 1,
@@ -25,6 +25,8 @@ public:
     void heal (int hp) {this->HP += hp;}
     //virtual void die() = 0; //different implementation for enemies and player
     virtual int getType() = 0;
+    virtual int getATK() = 0;
+    virtual std::string getName() = 0;
     int getHP() {return this->HP;}
     int getMaxHP() {return this->HPcap;}
     void setXY(int x, int y) {this->x = x; this->y = y;}

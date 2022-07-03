@@ -13,8 +13,8 @@ class AttackBehavior {
 public:
     void attack(IEnemy& enemy, Player &player) {
         player.getDMG(enemy.getATK());
-        if (enemy.getType() == 5)   //if its demon - it heals with each attack
-            enemy.heal(enemy.getATK() / 2);
+        if (enemy.getType() == 5 && (enemy.getMaxHP() - enemy.getHP()) > 1)   //if its demon - it heals with each attack
+            enemy.heal(1);
     }
 };
 

@@ -13,7 +13,7 @@
 
 class Player: public Actor {
 public:
-    Player(): Actor(baseHP, baseMP, baseRNGE, baseATK, HPcap, MPcap){};
+    Player(): Actor(baseHP = 200, baseMP = 50, baseRNGE = 1, baseATK = 10, HPcap = 200, MPcap = 50){};
     ~Player() = default;
     void interact(IEntity *);
     void die(Room *room);
@@ -21,14 +21,17 @@ public:
     void attack (IEntity *target);
     //void lvlUp() {this->lvl++;} //active when complete lvl
     void setWeapon(IWeapon *);
+    IWeapon* getWeapon (){return this->weapon;}
     void setPotion(IPotion *);
     //void discard(); ///discard thing on the cell player is on; -> WIP
     int getType() override {return 0;}
+    int getATK() override {if (weapon) return weapon->getATK(); else return this->baseATK;}
+    std::string getName() override {return "Player";}
 
 private:
-    int baseHP = 50, baseMP = 50, baseRNGE = 1, baseATK = 5; //initial values
-    int HPcap = 50*lvl, MPcap = 50*lvl; //max hp and mp
+    int baseHP = 200, baseMP = 50, baseRNGE = 1, baseATK = 10; //initial values
     int lvl = 1;
+    int HPcap = 200*lvl, MPcap = 50*lvl; //max hp and mp
     IWeapon *weapon = nullptr;
     IPotion *potion = nullptr;
 };

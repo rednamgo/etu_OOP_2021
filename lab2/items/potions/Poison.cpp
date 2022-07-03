@@ -5,10 +5,10 @@
 #include "Poison.h"
 
 void Poison::interact(IEntity *entity) { //can interact with actors and weapons only
-    auto target = dynamic_cast<Player*>(entity);
+    /*auto target = dynamic_cast<Player*>(entity);
     if (target) {
         target->setPotion(this);
-    } else use(entity);
+    } else */use(entity);
 }
 
 void Poison::use(IEntity *entity) {
