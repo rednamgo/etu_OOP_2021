@@ -131,6 +131,21 @@ output:
 Your input>>
 </pre>
 
+### CMake and possible complications
+1. You need NCurses library for this program to compile, thus if you don`t have it run following commands in the terminal:
+<pre>
+	sudo apt-get install libncurses5-dev libncursesw5-dev
+</pre>
+
+2. If while trying to build the app you get *Cmake Error: could not load cache* error, 
+use following commands in the terminal:
+<pre>
+	cmake -S . -B ./build
+	cmake --build ./build
+</pre>
+-> then run the program.
+
+
 
 ## Sources and useful materials
 - General:
