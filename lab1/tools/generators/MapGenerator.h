@@ -7,7 +7,7 @@
 #include "IGenerate.h"
 #include "../../map/Map.h"
 #include "RoomGenerator.h"
-#include "/home/red/Uni/OOP/reworked/lab1/tools/savers/SaveRoom.h"
+#include "../savers/SaveRoom.h"
 
 class MapGenerator: IGenerate {
 public:
